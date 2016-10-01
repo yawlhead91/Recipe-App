@@ -4,6 +4,13 @@ import { check } from 'meteor/check';
 
 export const Recipes = new Mongo.Collection('recipes');
 
+if (Meteor.isServer) {
+  // This code only runs on the server
+  Meteor.publish('recipes', function tasksPublication() {
+    return recipes.find({author: this.userId});
+  });
+}
+
 RecipeSchema = new SimpleSchema({
 	name: {
 		type: String,
@@ -17,7 +24,10 @@ RecipeSchema = new SimpleSchema({
 		type: String,
 		label: "Author",
 		autoValue: function() {
-			return this.use;rId
+			return this.userId
+		},
+		autoform: {
+			type: "hidden"
 		}
 	},
 	createdAt: {
@@ -25,6 +35,9 @@ RecipeSchema = new SimpleSchema({
 		label: "Created At",
 		autoValue: function() {
 			return new Date()
+		},
+		autoform: {
+			type: "hidden"
 		}
 	}
 });
