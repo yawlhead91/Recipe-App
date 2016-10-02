@@ -4,12 +4,31 @@ import { check } from 'meteor/check';
 
 export const Recipes = new Mongo.Collection('recipes');
 
-if (Meteor.isServer) {
-  // This code only runs on the server
-  Meteor.publish('recipes', function tasksPublication() {
-    return recipes.find({author: this.userId});
-  });
-}
+Recipes.allow({
+	insert: function (userId, doc) {
+		// the user must be logged in, and the document must be owned by the user
+		return !!userId;
+	},
+	update: function (userId, doc, fields, modifier) {
+		// can only change your own documents
+		return doc.owner === userId;
+	},
+	remove: function (userId, doc) {
+		// can only remove your own documents
+		return doc.owner === userId;
+	},
+	fetch: ['owner']
+});
+
+Ingredient = new SimpleSchema({
+	name: {
+		type: String
+	},
+	amount: {
+		type: String
+	}
+});
+
 
 RecipeSchema = new SimpleSchema({
 	name: {
@@ -19,6 +38,18 @@ RecipeSchema = new SimpleSchema({
 	desc: {
 		type: String,
 		label: "Description"
+	},
+	ingredients: {
+		//Sub Document
+		type: [Ingredient]
+	},
+	inMenu: {
+		type: Boolean,
+		defaultValue: false,
+		optional: true,
+		autoform: {
+			type: "hidden"
+		}
 	},
 	author: {
 		type: String,
@@ -43,3 +74,8 @@ RecipeSchema = new SimpleSchema({
 });
 
 Recipes.attachSchema( RecipeSchema );
+
+
+
+
+
