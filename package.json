@@ -1,5 +1,5 @@
 {
-  "name": "recipe-app",
+  "name": "materialize",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -7,5 +7,22 @@
   "dependencies": {
     "bcrypt": "^0.8.7",
     "meteor-node-stubs": "~0.2.0"
-  }
+  },
+  "description": "Application to add/remove recipes to a menu &amp; create shopping list.",
+  "version": "0.97.7",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dogfalo/materialize.git"
+  },
+  "keywords": [
+    "materialize"
+  ],
+  "author": "Dogfalo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dogfalo/materialize/issues"
+  },
+  "homepage": "https://github.com/Dogfalo/materialize#readme"
 }

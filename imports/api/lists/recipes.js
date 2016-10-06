@@ -9,9 +9,9 @@ Recipes.allow({
 		// the user must be logged in, and the document must be owned by the user
 		return !!userId;
 	},
-	update: function (userId, doc, fields, modifier) {
+	update: function (userId, doc) {
 		// can only change your own documents
-		return doc.owner === userId;
+		return !!userId;
 	},
 	remove: function (userId, doc) {
 		// can only remove your own documents
@@ -70,6 +70,14 @@ RecipeSchema = new SimpleSchema({
 		autoform: {
 			type: "hidden"
 		}
+	}
+});
+
+Meteor.methods({
+	toggleMenuItem: function(id, currentState) {
+		Recipes.update(id, {
+			$set: {inMenu: !currentState},
+		});
 	}
 });
 

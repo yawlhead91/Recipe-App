@@ -1,0 +1,16 @@
+<template name="ShoppingList">
+	<h1 class="page-title">My Shopping List</h1>
+	<ul class="shopping-list">
+	{{#if Template.subscriptionsReady}}
+		{{#each shoppingList}}
+			{{#each ingredients}}
+				{{name}}
+			{{/each}}
+		{{else}}
+			<p>None</p>
+		{{/each}}
+	{{else}}
+		<p>Loading</p>
+	{{/if}}
+	</ul>
+</template>
