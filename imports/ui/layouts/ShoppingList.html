@@ -4,7 +4,7 @@
 	{{#if Template.subscriptionsReady}}
 		{{#each shoppingList}}
 			{{#each ingredients}}
-				{{name}}
+				<li>{{name}} -<span class="amount">{{amount}}</span></li>
 			{{/each}}
 		{{else}}
 			<p>None</p>

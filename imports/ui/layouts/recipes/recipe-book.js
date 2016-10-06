@@ -6,6 +6,12 @@ import './recipe-book.html';
 import './newRecipe.js';
 import './Recipe.js';
 
+Template.Recipes.events({
+	'click .new-recipe': () => {
+		Session.set('newRecipe', true);
+	}
+})
+
 Template.Recipes.onCreated(function bodyOnCreated() {
   var self =this;
   self.autorun(() => {
